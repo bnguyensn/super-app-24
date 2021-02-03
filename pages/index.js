@@ -27,7 +27,7 @@ export default function Home() {
           <ReplIframe />
         </div>
 
-        <div className="flex justify-start flex-wrap mb-2">
+        <div className="flex justify-start flex-wrap pt-2 mb-2">
           <div className="flex-grow">
             <Input
               label="Message:"
