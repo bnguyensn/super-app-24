@@ -1,5 +1,9 @@
 @tailwind base;
 
+html {
+  height: -webkit-fill-available;
+}
+
 a {
   @apply text-blue-500
 }
@@ -15,5 +19,9 @@ a {
 @layer utilities {
   .wrapper {
     @apply my-0 mx-auto max-w-screen-sm
+  }
+
+  .safari-min-height-fix {
+    min-height: -webkit-fill-available;
   }
 }

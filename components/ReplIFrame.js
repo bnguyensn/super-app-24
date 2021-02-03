@@ -6,6 +6,7 @@ export default function ReplIframe() {
         height="100%"
         title="Chat history"
         src="https://blog.repl.it/__logs"
+        sandbox
       />
     </div>
   );
