@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import ExternalLink from './ExternalLink';
 
 export default function Layout({ pageTitle, children }) {
   return (
@@ -19,31 +20,26 @@ export default function Layout({ pageTitle, children }) {
       </div>
 
       <footer className="p-2 bg-green-50">
-        <div className="wrapper">
+        <div className="wrapper text-center">
           Made by{' '}
-          <a
-            href="https://github.com/bnguyensn"
-            target="_blank"
-            rel="noreferrer"
-          >
+          <ExternalLink href="https://github.com/bnguyensn">
             @bnguyensn
-          </a>{' '}
+          </ExternalLink>{' '}
           for{' '}
-          <a
-            href="https://blog.repl.it/__logs"
-            target="_blank"
-            rel="noreferrer"
-          >
+          <ExternalLink href="https://blog.repl.it/__logs">
             blog.repl.it/__logs
-          </a>
+          </ExternalLink>
           .{' '}
-          <a
-            href="https://github.com/bnguyensn/super-app-24"
-            target="_blank"
-            rel="noreferrer"
-          >
+          <ExternalLink href="https://github.com/bnguyensn/super-app-24">
             Source code.
-          </a>
+          </ExternalLink>{' '}
+          Inspired by{' '}
+          <ExternalLink href="https://twitter.com/amasad">@amasad</ExternalLink>
+          &#39;s{' '}
+          <ExternalLink href="https://blog.repl.it/internet-of-fun">
+            blog
+          </ExternalLink>
+          .
         </div>
       </footer>
     </div>
