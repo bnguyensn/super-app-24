@@ -8,7 +8,7 @@ export default function Layout({ pageTitle, children }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="min-h-screen flex flex-col">
+      <div className="min-h-screen safari-min-height-fix flex flex-col">
         <header className="bg-green-500 p-2">
           <div className="wrapper">
             <h1 className="text-2xl text-white">Repl Chat</h1>
