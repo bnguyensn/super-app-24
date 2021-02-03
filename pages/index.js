@@ -6,6 +6,7 @@ import Input from '../components/Input';
 import postMessage from '../services/postMessage';
 import SubmitMessageButton from '../components/SubmitMessageButton';
 import ColorSelect from '../components/ColorSelect';
+import ReplIframe from '../components/ReplIFrame';
 
 export default function Home() {
   const [username, setUsername] = React.useState('');
@@ -21,20 +22,26 @@ export default function Home() {
 
   return (
     <Layout pageTitle="Repl Chat">
-      <div className="flex justify-start flex-wrap mb-2">
+      <div className="flex flex-col flex-grow">
         <div className="flex-grow">
-          <Input
-            label="Message:"
-            value={message}
-            setValue={setMessage}
-            submit={handleSubmit}
-          />
+          <ReplIframe />
         </div>
-        <SubmitMessageButton handleSubmit={handleSubmit} />
-      </div>
 
-      <div className="flex justify-start flex-wrap mb-2">
-        <ColorSelect value={color} setValue={setColor} />
+        <div className="flex justify-start flex-wrap mb-2">
+          <div className="flex-grow">
+            <Input
+              label="Message:"
+              value={message}
+              setValue={setMessage}
+              submit={handleSubmit}
+            />
+          </div>
+          <SubmitMessageButton handleSubmit={handleSubmit} />
+        </div>
+
+        <div className="flex justify-start flex-wrap mb-2">
+          <ColorSelect value={color} setValue={setColor} />
+        </div>
       </div>
     </Layout>
   );

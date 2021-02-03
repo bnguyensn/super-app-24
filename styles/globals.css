@@ -11,3 +11,9 @@ a {
 }
 
 @tailwind utilities;
+
+@layer utilities {
+  .wrapper {
+    @apply my-0 mx-auto max-w-screen-sm
+  }
+}
