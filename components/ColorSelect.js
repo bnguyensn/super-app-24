@@ -5,8 +5,13 @@ export default function ColorSelect({ value, setValue }) {
 
   return (
     <label>
-      <span>Text color:</span>
-      <select name="text-color" value={value} onChange={handleChange}>
+      <span className="pr-2 w-20">Text color:</span>
+      <select
+        className="w-40"
+        name="text-color"
+        value={value}
+        onChange={handleChange}
+      >
         <option value="white">White</option>
         <option value="red">Red</option>
         <option value="green">Green</option>

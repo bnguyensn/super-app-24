@@ -1,6 +1,7 @@
 const BASE_URL = `https:/blog.repl.it`;
 
 const SPECIAL = {
+  // %1B
   ESC: ``,
 };
 
@@ -33,11 +34,14 @@ function colorize(message, color) {
   return message;
 }
 
-export default async function postMessage(message, { color } = {}) {
+export default async function postMessage(message, { color, username } = {}) {
   try {
+    const usernamePrefix = username ? `@${username}: ` : '';
     const formattedMessage = colorize(message, color);
 
-    const url = `${BASE_URL}/${encodeURIComponent(formattedMessage)}`;
+    const combinedMessage = `${usernamePrefix}${formattedMessage}`;
+
+    const url = `${BASE_URL}/${encodeURIComponent(combinedMessage)}`;
 
     await fetch(url);
   } catch (err) {
