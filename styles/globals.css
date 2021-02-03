@@ -1,7 +1,7 @@
 @tailwind base;
 
-html {
-  height: -webkit-fill-available;
+html, body, #__next {
+  height: 100%;
 }
 
 a {
@@ -19,9 +19,5 @@ a {
 @layer utilities {
   .wrapper {
     @apply my-0 mx-auto max-w-screen-sm
-  }
-
-  .safari-min-height-fix {
-    min-height: -webkit-fill-available;
   }
 }

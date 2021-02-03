@@ -2,13 +2,13 @@ import Head from 'next/head';
 
 export default function Layout({ pageTitle, children }) {
   return (
-    <div>
+    <div className="h-full">
       <Head>
         <title>{pageTitle}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="min-h-screen safari-min-height-fix flex flex-col">
+      <div className="h-full flex flex-col">
         <header className="bg-green-500 p-2">
           <div className="wrapper">
             <h1 className="text-2xl text-white">Repl Chat</h1>
