@@ -1,5 +1,3 @@
-const BASE_URL = `https:/blog.repl.it`;
-
 const SPECIAL = {
   // %1B
   ESC: ``,
@@ -36,12 +34,14 @@ function colorize(message, color) {
 
 export default async function postMessage(message, { color, username } = {}) {
   try {
+    const HOST_URL = `https:/blog.repl.it`;
+
     const usernamePrefix = username ? `@${username}: ` : '';
     const formattedMessage = colorize(message, color);
 
     const combinedMessage = `${usernamePrefix}${formattedMessage}`;
 
-    const url = `${BASE_URL}/${encodeURIComponent(combinedMessage)}`;
+    const url = `${HOST_URL}/${encodeURIComponent(combinedMessage)}`;
 
     await fetch(url);
   } catch (err) {
