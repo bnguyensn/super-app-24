@@ -25,9 +25,29 @@ export default function Layout({ pageTitle, children }) {
       <footer className="p-2">
         <Wrapper>
           <div>
-            Powered by{' '}
-            <a href="https://blog.repl.it" target="_blank" rel="noreferrer">
+            Made by{' '}
+            <a
+              href="https://github.com/bnguyensn"
+              target="_blank"
+              rel="noreferrer"
+            >
+              @bnguyensn
+            </a>{' '}
+            for{' '}
+            <a
+              href="https://blog.repl.it/__logs"
+              target="_blank"
+              rel="noreferrer"
+            >
               blog.repl.it/__logs
+            </a>
+            .{' '}
+            <a
+              href="https://github.com/bnguyensn/super-app-24"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Source code.
             </a>
           </div>
         </Wrapper>
