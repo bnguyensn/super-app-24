@@ -23,7 +23,7 @@ export default function Home() {
   return (
     <Layout pageTitle="Repl Chat">
       <div className="flex flex-col flex-grow">
-        <div className="flex-grow">
+        <div className="flex-grow flex">
           <ReplIframe />
         </div>
 
