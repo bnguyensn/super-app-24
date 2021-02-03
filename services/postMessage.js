@@ -34,7 +34,7 @@ function colorize(message, color) {
 
 export default async function postMessage(message, { color, username } = {}) {
   try {
-    const HOST_URL = `https:/blog.repl.it`;
+    const HOST_URL = `https://blog.repl.it`;
 
     const usernamePrefix = username ? `@${username}: ` : '';
     const formattedMessage = colorize(message, color);
