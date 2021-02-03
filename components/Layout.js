@@ -18,7 +18,7 @@ export default function Layout({ pageTitle, children }) {
         <main className="p-2 w-full wrapper flex flex-grow">{children}</main>
       </div>
 
-      <footer className="p-2">
+      <footer className="p-2 bg-green-50">
         <div className="wrapper">
           Made by{' '}
           <a
