@@ -1,6 +1,9 @@
 const SPECIAL = {
   // %1B
   ESC: ``,
+
+  // %0D
+  CR: `\r`,
 };
 
 const COLORS = {
@@ -32,14 +35,21 @@ function colorize(message, color) {
   return message;
 }
 
+function removeGET(message) {
+  const removeGETSuffix = `${SPECIAL.CR}   `;
+
+  return `${message}${removeGETSuffix}`;
+}
+
 export default async function postMessage(message, { color, username } = {}) {
   try {
     const HOST_URL = `https://blog.repl.it`;
 
     const usernamePrefix = username ? `@${username}: ` : '';
-    const formattedMessage = colorize(message, color);
+    const colorizedMessage = colorize(message, color);
+    const noGETMessage = removeGET(colorizedMessage);
 
-    const combinedMessage = `${usernamePrefix}${formattedMessage}`;
+    const combinedMessage = `${usernamePrefix}${noGETMessage}`;
 
     const url = `${HOST_URL}/${encodeURIComponent(combinedMessage)}`;
 
