@@ -4,6 +4,15 @@ const SPECIAL = {
 
   // %0D
   CR: `\r`,
+
+  // %0A
+  LF: `\n`,
+};
+
+const DECORATIONS = {
+  BOLD: [`${SPECIAL.ESC}[1m`, `${SPECIAL.ESC}[0m`],
+  ITALIC: [`${SPECIAL.ESC}[4m`, `${SPECIAL.ESC}[0m`],
+  REVERSED: [`${SPECIAL.ESC}[7m`, `${SPECIAL.ESC}[0m`],
 };
 
 const COLORS = {
@@ -19,17 +28,37 @@ function wrapMessage(message, start, end) {
   return `${start}${message}${end}`;
 }
 
+function addDecoration(message, decoration) {
+  if (decoration) {
+    const decorationNormalized = decoration.toUpperCase();
+
+    if (DECORATIONS[decorationNormalized]) {
+      return wrapMessage(
+        message,
+        DECORATIONS[decorationNormalized][0],
+        DECORATIONS[decorationNormalized][1]
+      );
+    }
+
+    return message;
+  }
+
+  return message;
+}
+
 function colorize(message, color) {
   if (color) {
     const colorNormalized = color.toUpperCase();
 
-    if (Object.keys(COLORS).includes(colorNormalized)) {
+    if (COLORS[colorNormalized]) {
       return wrapMessage(
         message,
         COLORS[colorNormalized][0],
         COLORS[colorNormalized][1]
       );
     }
+
+    return message;
   }
 
   return message;
@@ -41,15 +70,21 @@ function removeGET(message) {
   return `${message}${removeGETSuffix}`;
 }
 
+function addUserName(message, username) {
+  const decoratedUsername = addDecoration(`@${username}:`, 'bold');
+
+  return `${SPECIAL.CR}${decoratedUsername} ${message}`;
+}
+
 export default async function postMessage(message, { color, username } = {}) {
   try {
     const HOST_URL = `https://blog.repl.it`;
 
     const usernamePrefix = username ? `@${username}: ` : '';
     const colorizedMessage = colorize(message, color);
-    const noGETMessage = removeGET(colorizedMessage);
+    const withUserName = addUserName(colorizedMessage, 'BobTheBuilder69');
 
-    const combinedMessage = `${usernamePrefix}${noGETMessage}`;
+    const combinedMessage = `${usernamePrefix}${withUserName}`;
 
     const url = `${HOST_URL}/${encodeURIComponent(combinedMessage)}`;
 
