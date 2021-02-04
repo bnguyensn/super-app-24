@@ -11,15 +11,27 @@ import { getRandomUserName } from '../utils/username';
 import { getFromLocalStorage, saveToLocalStorage } from '../utils/localStorage';
 
 const LOCAL_STORAGE_USERNAME_KEY = 'username';
+const LOCAL_STORAGE_TEXT_COLOR_KEY = 'textcolor';
 
 export default function Home() {
+  const localStorageTextColor = getFromLocalStorage(
+    LOCAL_STORAGE_TEXT_COLOR_KEY
+  );
+
   const [username, setUsername] = React.useState('');
   const [message, setMessage] = React.useState('');
-  const [color, setColor] = React.useState('white');
+  const [color, setColor] = React.useState(
+    localStorageTextColor ? localStorageTextColor : 'white'
+  );
 
   const setAndSaveUsername = (newUsername) => {
     setUsername(newUsername);
     saveToLocalStorage(LOCAL_STORAGE_USERNAME_KEY, newUsername);
+  };
+
+  const setAndSaveTextColor = (newColor) => {
+    setColor(newColor);
+    saveToLocalStorage(LOCAL_STORAGE_TEXT_COLOR_KEY, newColor);
   };
 
   const handleSubmit = () => {
@@ -66,7 +78,7 @@ export default function Home() {
 
         <div className="flex flex-wrap mb-2 items-center">
           <div className="mr-4">
-            <ColorSelect value={color} setValue={setColor} />
+            <ColorSelect value={color} setValue={setAndSaveTextColor} />
           </div>
           <Input
             label="Username:"
