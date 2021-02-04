@@ -32,7 +32,8 @@ export default function Home() {
           <div className="flex-grow">
             <Input
               label="Message:"
-              placeholder="Type your message here..."
+              placeholder="Type your message here (max 500 chars)"
+              maxlength={500}
               value={message}
               setValue={setMessage}
               submit={handleSubmit}
@@ -47,7 +48,7 @@ export default function Home() {
           </div>
           <Input
             label="Username:"
-            placeholder="Choose a username..."
+            placeholder="Choose a username"
             value={username}
             setValue={setUsername}
           />
