@@ -2,6 +2,8 @@
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/16e5cfba-0598-4dbe-9e32-1253f72de842/deploy-status)](https://app.netlify.com/sites/repl-chat/deploys)
 
+Visit this at [repl-chat.netlify.com](https://repl-chat.netlify.com)
+
 ## What is this?
 
 A chat client for [blog.repl.it/__logs](https://blog.repl.it/__logs). Type in a message and it will be transmited to [repl.it](https://repl.it)'s blog real time log stream.
