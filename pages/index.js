@@ -7,9 +7,10 @@ import postMessage from '../services/postMessage';
 import SubmitMessageButton from '../components/SubmitMessageButton';
 import ColorSelect from '../components/ColorSelect';
 import ReplIframe from '../components/ReplIFrame';
+import { getRandomUserName } from '../utils/username';
 
 export default function Home() {
-  const [username, setUsername] = React.useState('');
+  const [username, setUsername] = React.useState(getRandomUserName());
   const [message, setMessage] = React.useState('');
   const [color, setColor] = React.useState('white');
 
@@ -27,10 +28,11 @@ export default function Home() {
           <ReplIframe />
         </div>
 
-        <div className="flex justify-start flex-wrap pt-2 mb-2">
+        <div className="flex justify-start flex-wrap pt-2 mb-4">
           <div className="flex-grow">
             <Input
               label="Message:"
+              placeholder="Type your message here..."
               value={message}
               setValue={setMessage}
               submit={handleSubmit}
@@ -39,8 +41,16 @@ export default function Home() {
           <SubmitMessageButton handleSubmit={handleSubmit} />
         </div>
 
-        <div className="flex justify-start flex-wrap mb-2">
-          <ColorSelect value={color} setValue={setColor} />
+        <div className="flex flex-wrap mb-2 items-center">
+          <div className="mr-4">
+            <ColorSelect value={color} setValue={setColor} />
+          </div>
+          <Input
+            label="Username:"
+            placeholder="Choose a username..."
+            value={username}
+            setValue={setUsername}
+          />
         </div>
       </div>
     </Layout>

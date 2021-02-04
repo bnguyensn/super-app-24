@@ -1,4 +1,4 @@
-export default function Input({ label, value, setValue, submit }) {
+export default function Input({ label, value, setValue, placeholder, submit }) {
   const handleChange = (e) => {
     setValue(e.target.value);
   };
@@ -17,6 +17,7 @@ export default function Input({ label, value, setValue, submit }) {
       <input
         className="mr-4 p-2 border rounded flex-grow"
         value={value}
+        placeholder={placeholder}
         onChange={handleChange}
         onKeyDown={handleKeyDown}
       />

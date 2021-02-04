@@ -71,6 +71,10 @@ function removeGET(message) {
 }
 
 function addUserName(message, username) {
+  if (!username) {
+    return message;
+  }
+
   const decoratedUsername = addDecoration(`@${username}:`, 'bold');
 
   return `${SPECIAL.CR}${decoratedUsername} ${message}`;
@@ -80,13 +84,10 @@ export default async function postMessage(message, { color, username } = {}) {
   try {
     const HOST_URL = `https://blog.repl.it`;
 
-    const usernamePrefix = username ? `@${username}: ` : '';
-    const colorizedMessage = colorize(message, color);
-    const withUserName = addUserName(colorizedMessage, 'BobTheBuilder69');
+    let msgToSend = colorize(message, color);
+    msgToSend = addUserName(msgToSend, username);
 
-    const combinedMessage = `${usernamePrefix}${withUserName}`;
-
-    const url = `${HOST_URL}/${encodeURIComponent(combinedMessage)}`;
+    const url = `${HOST_URL}/${encodeURIComponent(msgToSend)}`;
 
     await fetch(url);
   } catch (err) {
