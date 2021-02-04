@@ -8,11 +8,19 @@ import SubmitMessageButton from '../components/SubmitMessageButton';
 import ColorSelect from '../components/ColorSelect';
 import ReplIframe from '../components/ReplIFrame';
 import { getRandomUserName } from '../utils/username';
+import { getFromLocalStorage, saveToLocalStorage } from '../utils/localStorage';
+
+const LOCAL_STORAGE_USERNAME_KEY = 'username';
 
 export default function Home() {
-  const [username, setUsername] = React.useState(getRandomUserName());
+  const [username, setUsername] = React.useState('');
   const [message, setMessage] = React.useState('');
   const [color, setColor] = React.useState('white');
+
+  const setAndSaveUsername = (newUsername) => {
+    setUsername(newUsername);
+    saveToLocalStorage(LOCAL_STORAGE_USERNAME_KEY, newUsername);
+  };
 
   const handleSubmit = () => {
     if (message) {
@@ -20,6 +28,20 @@ export default function Home() {
       setMessage('');
     }
   };
+
+  // Run only once on the first render. This either restores a previously saved
+  // username from localStorage, or generates one and stores it in localStorage.
+  React.useEffect(() => {
+    const localStorageUsername = getFromLocalStorage(
+      LOCAL_STORAGE_USERNAME_KEY
+    );
+
+    if (localStorageUsername) {
+      setAndSaveUsername(localStorageUsername);
+    } else {
+      setAndSaveUsername(getRandomUserName());
+    }
+  }, [setUsername]);
 
   return (
     <Layout pageTitle="Repl Chat">
@@ -50,7 +72,7 @@ export default function Home() {
             label="Username:"
             placeholder="Choose a username"
             value={username}
-            setValue={setUsername}
+            setValue={setAndSaveUsername}
           />
         </div>
       </div>
