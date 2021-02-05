@@ -1,13 +1,13 @@
-export default function Input({ label, value, setValue, submit, ...props }) {
+export default function Checkbox({ label, checked, setValue, ...props }) {
   const handleChange = (e) => {
-    setValue(e.target.value);
+    setValue(e.target.checked);
   };
 
   const handleKeyDown = (e) => {
     const key = e.key;
 
-    if (key === 'Enter' && submit) {
-      submit();
+    if (key === 'Enter' || key === 'Space') {
+      setValue(e.target.checked);
     }
   };
 
@@ -15,8 +15,8 @@ export default function Input({ label, value, setValue, submit, ...props }) {
     <label className="flex items-center w-100">
       <span className="pr-2 w-20">{label}</span>
       <input
-        className="mr-4 p-2 border rounded flex-grow"
-        value={value}
+        type="checkbox"
+        checked={checked}
         onChange={handleChange}
         onKeyDown={handleKeyDown}
         {...props}
