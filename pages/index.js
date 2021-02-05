@@ -9,6 +9,8 @@ import ColorSelect from '../components/ColorSelect';
 import ReplIframe from '../components/ReplIFrame';
 import { getRandomUserName } from '../utils/username';
 import { getFromLocalStorage, saveToLocalStorage } from '../utils/localStorage';
+import Checkbox from '../components/Checkbox';
+import TextArea from '../components/TextArea';
 
 const LOCAL_STORAGE_USERNAME_KEY = 'username';
 const LOCAL_STORAGE_TEXT_COLOR_KEY = 'textcolor';
@@ -18,11 +20,12 @@ export default function Home() {
     LOCAL_STORAGE_TEXT_COLOR_KEY
   );
 
-  const [username, setUsername] = React.useState('');
   const [message, setMessage] = React.useState('');
+  const [username, setUsername] = React.useState('');
   const [color, setColor] = React.useState(
     localStorageTextColor ? localStorageTextColor : 'white'
   );
+  const [isMultiline, setIsMultiline] = React.useState(false);
 
   const setAndSaveUsername = (newUsername) => {
     setUsername(newUsername);
@@ -64,14 +67,24 @@ export default function Home() {
 
         <div className="flex justify-start flex-wrap pt-2 mb-4">
           <div className="flex-grow">
-            <Input
-              label="Message:"
-              placeholder="Type your message here (max 500 chars)"
-              maxlength={500}
-              value={message}
-              setValue={setMessage}
-              submit={handleSubmit}
-            />
+            {isMultiline ? (
+              <TextArea
+                label="Message:"
+                value={message}
+                setValue={setMessage}
+                placeholder="Type your message here (max 500 chars)"
+                maxLength={500}
+              />
+            ) : (
+              <Input
+                label="Message:"
+                value={message}
+                setValue={setMessage}
+                placeholder="Type your message here (max 500 chars)"
+                maxLength={500}
+                submit={handleSubmit}
+              />
+            )}
           </div>
           <SubmitMessageButton handleSubmit={handleSubmit} />
         </div>
@@ -85,6 +98,11 @@ export default function Home() {
             placeholder="Choose a username"
             value={username}
             setValue={setAndSaveUsername}
+          />
+          <Checkbox
+            label="Multiline:"
+            checked={isMultiline}
+            setValue={setIsMultiline}
           />
         </div>
       </div>

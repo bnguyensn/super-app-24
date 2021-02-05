@@ -64,10 +64,14 @@ function colorize(message, color) {
   return message;
 }
 
-function removeGET(message) {
-  const removeGETSuffix = `${SPECIAL.CR}   `;
+function removeGET(message, originalMessage) {
+  // If the original message is less than 3 characters, the CR won't cover the
+  // "GET" text. Thus we pad it with some spaces.
+  if (originalMessage.length < 3) {
+    return `${SPECIAL.CR}${message}  `;
+  }
 
-  return `${message}${removeGETSuffix}`;
+  return `${SPECIAL.CR}${message}`;
 }
 
 function addUserName(message, username) {
@@ -85,7 +89,9 @@ export default async function postMessage(message, { color, username } = {}) {
     const HOST_URL = `https://blog.repl.it`;
 
     let msgToSend = colorize(message, color);
-    msgToSend = addUserName(msgToSend, username);
+    msgToSend = username
+      ? addUserName(msgToSend, username)
+      : removeGET(msgToSend, message);
 
     const url = `${HOST_URL}/${encodeURIComponent(msgToSend)}`;
 
